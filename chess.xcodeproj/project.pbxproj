@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		321F8D38291FB4DF001C2626 /* GameBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321F8D37291FB4DF001C2626 /* GameBoardCell.swift */; };
+		321F8D3A291FCA01001C2626 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321F8D39291FCA01001C2626 /* MainViewModel.swift */; };
+		321F8D3C291FCA36001C2626 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321F8D3B291FCA36001C2626 /* MainModel.swift */; };
+		329E19F2291FB2D700AEEBC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E19F1291FB2D700AEEBC3 /* AppDelegate.swift */; };
+		329E19F4291FB2D700AEEBC3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E19F3291FB2D700AEEBC3 /* SceneDelegate.swift */; };
+		329E19F6291FB2D700AEEBC3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E19F5291FB2D700AEEBC3 /* MainViewController.swift */; };
+		329E19F9291FB2D700AEEBC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 329E19F7291FB2D700AEEBC3 /* Main.storyboard */; };
+		329E19FB291FB2D700AEEBC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 329E19FA291FB2D700AEEBC3 /* Assets.xcassets */; };
+		329E19FE291FB2D700AEEBC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 329E19FC291FB2D700AEEBC3 /* LaunchScreen.storyboard */; };
+		32AB1812292003EF00D9746C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AB1811292003EF00D9746C /* TestViewController.swift */; };
+		6C99110CD40E45F71381DEF3 /* Pods_chess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591EBFF14EF7D4372E724AEF /* Pods_chess.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		321F8D37291FB4DF001C2626 /* GameBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardCell.swift; sourceTree = "<group>"; };
+		321F8D39291FCA01001C2626 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		321F8D3B291FCA36001C2626 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		329E19EE291FB2D700AEEBC3 /* chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		329E19F1291FB2D700AEEBC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		329E19F3291FB2D700AEEBC3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		329E19F5291FB2D700AEEBC3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		329E19F8291FB2D700AEEBC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		329E19FA291FB2D700AEEBC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		329E19FD291FB2D700AEEBC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		329E19FF291FB2D700AEEBC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32AB1811292003EF00D9746C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		591EBFF14EF7D4372E724AEF /* Pods_chess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F9E2EAB2425BA46C937AD38 /* Pods-chess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chess.debug.xcconfig"; path = "Target Support Files/Pods-chess/Pods-chess.debug.xcconfig"; sourceTree = "<group>"; };
+		E179E37ECD6FAA25BB00F3C8 /* Pods-chess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chess.release.xcconfig"; path = "Target Support Files/Pods-chess/Pods-chess.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		329E19EB291FB2D700AEEBC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C99110CD40E45F71381DEF3 /* Pods_chess.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		321F8D32291FB31C001C2626 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				321F8D39291FCA01001C2626 /* MainViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		321F8D33291FB322001C2626 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				321F8D36291FB33E001C2626 /* Storyboards */,
+				329E19F5291FB2D700AEEBC3 /* MainViewController.swift */,
+				32AB1811292003EF00D9746C /* TestViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		321F8D34291FB326001C2626 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				321F8D37291FB4DF001C2626 /* GameBoardCell.swift */,
+				321F8D3B291FCA36001C2626 /* MainModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		321F8D35291FB32B001C2626 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				329E19F1291FB2D700AEEBC3 /* AppDelegate.swift */,
+				329E19F3291FB2D700AEEBC3 /* SceneDelegate.swift */,
+				329E19FA291FB2D700AEEBC3 /* Assets.xcassets */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		321F8D36291FB33E001C2626 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				329E19F7291FB2D700AEEBC3 /* Main.storyboard */,
+				329E19FC291FB2D700AEEBC3 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		329E19E5291FB2D700AEEBC3 = {
+			isa = PBXGroup;
+			children = (
+				329E19F0291FB2D700AEEBC3 /* chess */,
+				329E19EF291FB2D700AEEBC3 /* Products */,
+				979F90A14BCCB4F8337662D6 /* Pods */,
+				D64967C885E4ADBEFC51FB4C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		329E19EF291FB2D700AEEBC3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				329E19EE291FB2D700AEEBC3 /* chess.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		329E19F0291FB2D700AEEBC3 /* chess */ = {
+			isa = PBXGroup;
+			children = (
+				321F8D35291FB32B001C2626 /* Others */,
+				321F8D34291FB326001C2626 /* Models */,
+				321F8D33291FB322001C2626 /* Views */,
+				321F8D32291FB31C001C2626 /* ViewModels */,
+				329E19FF291FB2D700AEEBC3 /* Info.plist */,
+			);
+			path = chess;
+			sourceTree = "<group>";
+		};
+		979F90A14BCCB4F8337662D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F9E2EAB2425BA46C937AD38 /* Pods-chess.debug.xcconfig */,
+				E179E37ECD6FAA25BB00F3C8 /* Pods-chess.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D64967C885E4ADBEFC51FB4C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				591EBFF14EF7D4372E724AEF /* Pods_chess.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		329E19ED291FB2D700AEEBC3 /* chess */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 329E1A02291FB2D700AEEBC3 /* Build configuration list for PBXNativeTarget "chess" */;
+			buildPhases = (
+				63085038E704E86FD1C4F1D7 /* [CP] Check Pods Manifest.lock */,
+				329E19EA291FB2D700AEEBC3 /* Sources */,
+				329E19EB291FB2D700AEEBC3 /* Frameworks */,
+				329E19EC291FB2D700AEEBC3 /* Resources */,
+				DF8AA98C93A69A8F4FE3F928 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = chess;
+			productName = chess;
+			productReference = 329E19EE291FB2D700AEEBC3 /* chess.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		329E19E6291FB2D700AEEBC3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					329E19ED291FB2D700AEEBC3 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 329E19E9291FB2D700AEEBC3 /* Build configuration list for PBXProject "chess" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 329E19E5291FB2D700AEEBC3;
+			productRefGroup = 329E19EF291FB2D700AEEBC3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				329E19ED291FB2D700AEEBC3 /* chess */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		329E19EC291FB2D700AEEBC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				329E19FE291FB2D700AEEBC3 /* LaunchScreen.storyboard in Resources */,
+				329E19FB291FB2D700AEEBC3 /* Assets.xcassets in Resources */,
+				329E19F9291FB2D700AEEBC3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		63085038E704E86FD1C4F1D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chess-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF8AA98C93A69A8F4FE3F928 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-chess/Pods-chess-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-chess/Pods-chess-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-chess/Pods-chess-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		329E19EA291FB2D700AEEBC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32AB1812292003EF00D9746C /* TestViewController.swift in Sources */,
+				321F8D3A291FCA01001C2626 /* MainViewModel.swift in Sources */,
+				321F8D38291FB4DF001C2626 /* GameBoardCell.swift in Sources */,
+				321F8D3C291FCA36001C2626 /* MainModel.swift in Sources */,
+				329E19F6291FB2D700AEEBC3 /* MainViewController.swift in Sources */,
+				329E19F2291FB2D700AEEBC3 /* AppDelegate.swift in Sources */,
+				329E19F4291FB2D700AEEBC3 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		329E19F7291FB2D700AEEBC3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				329E19F8291FB2D700AEEBC3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		329E19FC291FB2D700AEEBC3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				329E19FD291FB2D700AEEBC3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		329E1A00291FB2D700AEEBC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		329E1A01291FB2D700AEEBC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		329E1A03291FB2D700AEEBC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F9E2EAB2425BA46C937AD38 /* Pods-chess.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 962338348U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = chess/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iskhak.chess;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		329E1A04291FB2D700AEEBC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E179E37ECD6FAA25BB00F3C8 /* Pods-chess.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 962338348U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = chess/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iskhak.chess;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		329E19E9291FB2D700AEEBC3 /* Build configuration list for PBXProject "chess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				329E1A00291FB2D700AEEBC3 /* Debug */,
+				329E1A01291FB2D700AEEBC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		329E1A02291FB2D700AEEBC3 /* Build configuration list for PBXNativeTarget "chess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				329E1A03291FB2D700AEEBC3 /* Debug */,
+				329E1A04291FB2D700AEEBC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 329E19E6291FB2D700AEEBC3 /* Project object */;
+}
