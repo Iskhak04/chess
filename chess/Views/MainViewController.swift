@@ -14,7 +14,11 @@ class MainViewController: UIViewController {
     
     var isWhite = true
     
+    var whitesTurn = true
+    
     var x = 0
+    
+    var lastClick: Int = -1
     
     private var currentBoardV: [[String]] = []
     private var possibleMovesV: [Int] = []
@@ -38,6 +42,7 @@ class MainViewController: UIViewController {
         //get current board
         viewModel.currentBoardVM.subscribe(onNext: {
             self.currentBoardV = $0
+            self.gameBoardCollectoinView.reloadData()
         }).disposed(by: bag)
         
         //get all possible moves for a tapped piece
@@ -129,7 +134,47 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //let cell = gameBoardCollectoinView.cellForItem(at: indexPath) as! GameBoardCell
         
-        viewModel.cellToCheckVM.onNext(indexPath.row)
+        let row = indexPath.row / 8
+        let column = indexPath.row - row * 8
         
+        if !possibleMovesV.isEmpty {
+            if possibleMovesV.contains(indexPath.row) {
+                viewModel.moveToMakeVM.onNext([lastClick, indexPath.row])
+                whitesTurn = !whitesTurn
+                possibleMovesV.removeAll()
+            } else {
+                if whitesTurn {
+                    if currentBoardV[row][column].contains("w") {
+                        possibleMovesV.removeAll()
+                        viewModel.cellToCheckVM.onNext(indexPath.row)
+                        lastClick = indexPath.row
+                    } else {
+                        possibleMovesV.removeAll()
+                        gameBoardCollectoinView.reloadData()
+                    }
+                } else {
+                    if currentBoardV[row][column].contains("b") {
+                        possibleMovesV.removeAll()
+                        viewModel.cellToCheckVM.onNext(indexPath.row)
+                        lastClick = indexPath.row
+                    } else {
+                        possibleMovesV.removeAll()
+                        gameBoardCollectoinView.reloadData()
+                    }
+                }
+            }
+        } else {
+            if whitesTurn {
+                if currentBoardV[row][column].contains("w") {
+                    viewModel.cellToCheckVM.onNext(indexPath.row)
+                    lastClick = indexPath.row
+                }
+            } else {
+                if currentBoardV[row][column].contains("b") {
+                    viewModel.cellToCheckVM.onNext(indexPath.row)
+                    lastClick = indexPath.row
+                }
+            }
+        }
     }
 }

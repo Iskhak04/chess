@@ -19,6 +19,7 @@ class MainViewModel: NSObject {
     var getCurrentBoardVM = PublishSubject<Bool>()
     var cellToCheckVM = PublishSubject<Int>()
     var possibleMovesVM = PublishSubject<[Int]>()
+    var moveToMakeVM = PublishSubject<[Int]>()
     
     override init() {
         super.init()
@@ -37,6 +38,10 @@ class MainViewModel: NSObject {
         
         cellToCheckVM.subscribe(onNext: {
             self.model.cellToCheckM.onNext($0)
+        }).disposed(by: bag)
+        
+        moveToMakeVM.subscribe(onNext: {
+            self.model.moveToMakeM.onNext($0)
         }).disposed(by: bag)
         
     }

@@ -16,8 +16,8 @@ class MainModel: NSObject {
     private var currentBoard: [[String]] = [["Rw", "Kw", "Bw", "Kingw", "Qw", "Bw", "Kw", "Rw"],
                                             ["Pw", "Pw", "Pw", "Pw",    "Pw", "Pw", "Pw", "Pw"],
                                             ["0",  "0",  "0",  "0",     "0",  "0",  "0",  "0"],
-                                            ["0",  "0",  "0",  "Qb",     "0",  "0",  "0",  "Qb"],
-                                            ["Qw",  "0",  "0",  "Qw",     "0",  "0",  "0",  "0"],
+                                            ["0",  "0",  "0",  "0",     "0",  "0",  "0",  "0"],
+                                            ["0",  "0",  "0",  "0",     "0",  "0",  "0",  "0"],
                                             ["0",  "0",  "0",  "0",     "0",  "0",  "0",  "0"],
                                             ["Pb", "Pb", "Pb", "Pb",    "Pb", "Pb", "Pb", "Pb"],
                                             ["Rb", "Kb", "Bb", "Kingb", "Qb", "Bb", "Kb", "Rb"]]
@@ -26,6 +26,7 @@ class MainModel: NSObject {
     var getCurrentBoardM = PublishSubject<Bool>()
     var cellToCheckM = PublishSubject<Int>()
     var possibleMovesM = PublishSubject<[Int]>()
+    var moveToMakeM = PublishSubject<[Int]>()
     
     override init() {
         super.init()
@@ -42,6 +43,10 @@ class MainModel: NSObject {
             
             self.possibleMovesM.onNext(possibleMoves)
             
+        }).disposed(by: bag)
+        
+        moveToMakeM.subscribe(onNext: {
+            self.makeTheMove(firstIndexPath: $0[0], secondIndexPath: $0[1])
         }).disposed(by: bag)
         
     }
@@ -186,7 +191,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -198,7 +208,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -210,7 +225,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -222,7 +242,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -234,7 +259,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -245,7 +275,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -257,7 +292,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -268,7 +308,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -280,7 +325,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -291,7 +341,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -303,7 +358,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -314,7 +374,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -326,7 +391,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -337,7 +407,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -348,7 +423,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -359,7 +439,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -373,7 +458,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -385,7 +475,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -397,7 +492,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -409,7 +509,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -421,7 +526,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -432,7 +542,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -444,7 +559,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -455,7 +575,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -467,7 +592,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -478,7 +608,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -490,7 +625,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -501,7 +641,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -513,7 +658,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -524,7 +674,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -535,7 +690,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -546,7 +706,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -640,7 +805,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -652,7 +822,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -664,7 +839,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -676,7 +856,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -688,7 +873,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -699,7 +889,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -711,7 +906,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -722,7 +922,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -734,7 +939,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -745,7 +955,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -757,7 +972,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -768,7 +988,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -780,7 +1005,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -791,7 +1021,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -802,7 +1037,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -813,7 +1053,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("b") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -883,7 +1128,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -895,7 +1145,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -907,7 +1162,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -919,7 +1179,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -931,7 +1196,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -942,7 +1212,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -954,7 +1229,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -965,7 +1245,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -977,7 +1262,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -988,7 +1278,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -1000,7 +1295,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -1011,7 +1311,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -1023,7 +1328,12 @@ class MainModel: NSObject {
                 //top-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -1034,7 +1344,12 @@ class MainModel: NSObject {
                 //top-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 - abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        if indexPath / 8 - abs(i - column) == 0 {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 - abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 - abs(i - column)) * 8 + i)
                         break
@@ -1045,7 +1360,12 @@ class MainModel: NSObject {
                 //bottom-left
                 for i in stride(from: column-1, through: 0, by: -1) {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -1056,7 +1376,12 @@ class MainModel: NSObject {
                 //bottom-right
                 for i in column+1...7 {
                     if currentBoard[indexPath / 8 + abs(i - column)][i] == "0" {
-                        possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        if indexPath / 8 + abs(i - column) == 7 {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                            break
+                        } else {
+                            possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
+                        }
                     } else if currentBoard[indexPath / 8 + abs(i - column)][i].contains("w") {
                         possibleMoves.append((indexPath / 8 + abs(i - column)) * 8 + i)
                         break
@@ -1138,5 +1463,18 @@ class MainModel: NSObject {
         }
         
         return possibleMoves
+    }
+    
+    private func makeTheMove(firstIndexPath: Int, secondIndexPath: Int) {
+        let row1 = firstIndexPath / 8
+        let column1 = firstIndexPath - row1 * 8
+        
+        let row2 = secondIndexPath / 8
+        let column2 = secondIndexPath - row2 * 8
+        
+        currentBoard[row2][column2] = currentBoard[row1][column1]
+        currentBoard[row1][column1] = "0"
+        
+        getCurrentBoardM.onNext(true)
     }
 }
