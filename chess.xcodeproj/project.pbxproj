@@ -17,6 +17,7 @@
 		329E19FB291FB2D700AEEBC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 329E19FA291FB2D700AEEBC3 /* Assets.xcassets */; };
 		329E19FE291FB2D700AEEBC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 329E19FC291FB2D700AEEBC3 /* LaunchScreen.storyboard */; };
 		32AB1812292003EF00D9746C /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AB1811292003EF00D9746C /* TestViewController.swift */; };
+		32B3E76929232B35008EDF16 /* PawnPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B3E76829232B35008EDF16 /* PawnPromotionCell.swift */; };
 		6C99110CD40E45F71381DEF3 /* Pods_chess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 591EBFF14EF7D4372E724AEF /* Pods_chess.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		329E19FD291FB2D700AEEBC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		329E19FF291FB2D700AEEBC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32AB1811292003EF00D9746C /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		32B3E76829232B35008EDF16 /* PawnPromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawnPromotionCell.swift; sourceTree = "<group>"; };
 		591EBFF14EF7D4372E724AEF /* Pods_chess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F9E2EAB2425BA46C937AD38 /* Pods-chess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chess.debug.xcconfig"; path = "Target Support Files/Pods-chess/Pods-chess.debug.xcconfig"; sourceTree = "<group>"; };
 		E179E37ECD6FAA25BB00F3C8 /* Pods-chess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chess.release.xcconfig"; path = "Target Support Files/Pods-chess/Pods-chess.release.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			children = (
 				321F8D37291FB4DF001C2626 /* GameBoardCell.swift */,
 				321F8D3B291FCA36001C2626 /* MainModel.swift */,
+				32B3E76829232B35008EDF16 /* PawnPromotionCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				329E19F6291FB2D700AEEBC3 /* MainViewController.swift in Sources */,
 				329E19F2291FB2D700AEEBC3 /* AppDelegate.swift in Sources */,
 				329E19F4291FB2D700AEEBC3 /* SceneDelegate.swift in Sources */,
+				32B3E76929232B35008EDF16 /* PawnPromotionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

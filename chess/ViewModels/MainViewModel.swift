@@ -20,9 +20,14 @@ class MainViewModel: NSObject {
     var cellToCheckVM = PublishSubject<Int>()
     var possibleMovesVM = PublishSubject<[Int]>()
     var moveToMakeVM = PublishSubject<[Int]>()
+    var pieceToPromoteVM = PublishSubject<(Int, Int, String)>()
     
     override init() {
         super.init()
+        
+        pieceToPromoteVM.subscribe(onNext: {
+            self.model.pieceToPromoteM.onNext($0)
+        }).disposed(by: bag)
         
         model.possibleMovesM.subscribe(onNext: {
             self.possibleMovesVM.onNext($0)
